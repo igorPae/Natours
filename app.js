@@ -15,6 +15,7 @@ const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
+const compression = require('compression');
 
 const app = express();
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
@@ -53,6 +54,7 @@ app.use(hpp({
     whitelist: ['duration', 'ratingsQuantity', 'ratingsAverage', 'difficulty', 'price', 'maxGroupSize']
 }));
 
+app.use(compression());
 
 app.use((req, res, next) => {
     req.requestTime = new Date().toISOString();

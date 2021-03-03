@@ -9,7 +9,6 @@ exports.getOverview = async (req, res) => {
     const tours = await Tour.find();
     // 2) Build template
     // 3) Render template with data
-    console.log('tours ', tours);
     res.status(200).render('overview', {
         title: 'All Tours',
         tours

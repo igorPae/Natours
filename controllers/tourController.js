@@ -35,9 +35,7 @@ const uploadTourImages = upload.fields([{
 // upload.array('images', 5);
 
 const resizeTourImages = catchAsync(async (req, res, next) => {
-  console.log(req.files);
   if (!req.files.imageCover || !req.files.images) return next();
-console.log('here');
 
   req.body.imageCover = `tour-${req.params.id}-${Date.now()}-cover.jpeg`;
   await sharp(req.files.imageCover[0].buffer)
@@ -64,7 +62,6 @@ console.log('here');
       req.body.images.push(filename);
     })
   );
-  console.log(req.body.images);
   next();
 });
 
@@ -271,7 +268,6 @@ function getToursWithin() {
       next(new AppError('Please provide in right format', 400))
     }
 
-    console.log(distance, lat, lng, unit);
     const tours = await Tour.find({
       startLocation: {
         $geoWithin: {
